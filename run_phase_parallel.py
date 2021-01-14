@@ -11,10 +11,13 @@ import pyci_pairing_plus_ph as pyci
 sys.path.append('/mnt/home/daviso53/Research/im-srg_tensorflow/')
 from main import main
 
-if not os.path.exists('solved_mesh/'):
-    os.mkdir('solved_mesh/')
-
 paramPath = sys.argv[1]
+EXP_DIR = sys.argv[2]
+SOLVED_MESH_DIR = EXP_DIR+'solved_mesh/'
+
+if not os.path.exists(SOLVED_MESH_DIR):
+    os.mkdir(SOLVED_MESH_DIR)
+
 
 g, pb = pickle.load(open(paramPath, 'rb'))
 
@@ -41,4 +44,4 @@ solved_dict = {'g':g, 'pb':pb,
                'eta1B_norm':np.linalg.norm(np.ravel(eta1B_vac)), 
                'eta2B_norm':np.linalg.norm(np.ravel(eta2B_vac))}
 
-pickle.dump(solved_dict, open('solved_mesh/{}'.format(paramPath.split('/')[1]), 'wb'))
+pickle.dump(solved_dict, open('{}/{}'.format(SOLVED_MESH_DIR, paramPath.split('/')[1]), 'wb'))
