@@ -2,6 +2,7 @@ import numpy as np
 import sys, pickle, os
 
 
+
 MESH_DIR = 'mesh_points/'
 
 if not os.path.exists(MESH_DIR):
