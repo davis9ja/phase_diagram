@@ -1,6 +1,6 @@
 # PHASE DIAGRAM
 
-The purpose of this code is to solve a pairing model parameter mesh using the reference-ensemble-optimized IM-SRG-TN. For all mesh points, the energy space parameter $\delta$ is set to 1.0.
+The purpose of this code is to solve a pairing model parameter mesh using the reference-ensemble-optimized IM-SRG-TN. For all mesh points, the energy space parameter `d` is set to 1.0.
 
 ### FILES:
 
