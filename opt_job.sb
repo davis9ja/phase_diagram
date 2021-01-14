@@ -21,8 +21,6 @@
 module load GCC/6.4.0-2.28  OpenMPI/2.1.2
 module load CUDA/10.0.130 cuDNN/7.5.0.56-CUDA-10.0.130
 
-
-#cd /mnt/home/daviso53/Research/im-srg_tensorflow   ### change to the directory where your code is located
  
 #~/anaconda3/envs/dev-cpu/bin/python -m timeit -n 10 -r 3 'from main import main; main(4,4)'       ### call your executable (similar to mpirun)
 #~/anaconda3/bin/python main.py
