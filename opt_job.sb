@@ -1,0 +1,45 @@
+#!/bin/bash --login
+########## SBATCH Lines for Resource Request ##########
+ 
+#SBATCH --time=00:20:00             # limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --constraint="lac"
+#SBATCH --ntasks=1                  # number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=14           # number of CPUs (or cores) per task (same as -c)
+##SBATCH --gres=gpu:k80:1
+#SBATCH --mem=5G            # memory required per allocated CPU (or core) - amount of memory (in bytes)
+#SBATCH --job-name ref_opt      # you can give your job a name for easier identification (same as -J)
+#SBATCH -o outputs/slurm-%j.out
+##SBATCH -q normal
+#SBATCH --array=88,99,112,114,116,119,122,128,146,238,246,275,488,489,513,518,608,797,799,802
+########## Command Lines to Run ##########
+ 
+# module purge                        ### load necessary modules, e.g.
+# module load GCC/6.4.0-2.28  OpenMPI/2.1.2
+# module load CUDA/10.0.130 cuDNN/7.5.0.56-CUDA-10.0.130
+#module load Python/3.6.4
+
+module load GCC/6.4.0-2.28  OpenMPI/2.1.2
+module load CUDA/10.0.130 cuDNN/7.5.0.56-CUDA-10.0.130
+
+
+#cd /mnt/home/daviso53/Research/im-srg_tensorflow   ### change to the directory where your code is located
+ 
+#~/anaconda3/envs/dev-cpu/bin/python -m timeit -n 10 -r 3 'from main import main; main(4,4)'       ### call your executable (similar to mpirun)
+#~/anaconda3/bin/python main.py
+
+#source ~/Research/im-srg_tensorflow/load_mods.bash
+
+CASE_NUM=`printf %03d $SLURM_ARRAY_TASK_ID`
+
+source ~/.bashrc
+conda activate
+
+FILE=solved_mesh/${CASE_NUM}.p
+if ! test -f "$FILE"; then
+    /mnt/home/daviso53/anaconda3/bin/python -u run_phase_parallel.py mesh_points/${CASE_NUM}.p
+fi
+
+
+#python -u benchmarking_wd/imsrg_pairing.py >> timing_outputs/matrixpy.txt
+
+scontrol show job $SLURM_JOB_ID     ### write job information to output file
