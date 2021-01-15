@@ -15,6 +15,8 @@ paramPath = sys.argv[1]
 EXP_DIR = sys.argv[2]
 SOLVED_MESH_DIR = EXP_DIR+'solved_mesh/'
 
+print(paramPath, SOLVED_MESH_DIR)
+
 if not os.path.exists(SOLVED_MESH_DIR):
     os.mkdir(SOLVED_MESH_DIR)
 
@@ -44,4 +46,4 @@ solved_dict = {'g':g, 'pb':pb,
                'eta1B_norm':np.linalg.norm(np.ravel(eta1B_vac)), 
                'eta2B_norm':np.linalg.norm(np.ravel(eta2B_vac))}
 
-pickle.dump(solved_dict, open('{}/{}'.format(SOLVED_MESH_DIR, paramPath.split('/')[1]), 'wb'))
+pickle.dump(solved_dict, open('{}/{}'.format(SOLVED_MESH_DIR, paramPath.split('/')[2]), 'wb'))
