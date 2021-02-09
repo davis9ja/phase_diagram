@@ -3,8 +3,8 @@ import sys
 
 EXP_DIR = sys.argv[1]
 
-solvedGlob = glob.glob(EXP_DIR+'/solved_mesh/*.p')
-meshGlob = glob.glob(EXP_DIR+'/mesh_points/*.p')
+solvedGlob = glob.glob(EXP_DIR+'solved_mesh/*.p')
+meshGlob = glob.glob(EXP_DIR+'mesh_points/*.p')
 
 solvedList = [int((path.split('/')[2]).replace('.p', '')) for path in solvedGlob]
 meshList = [int((path.split('/')[2]).replace('.p', '')) for path in meshGlob]
